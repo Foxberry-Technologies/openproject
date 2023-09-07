@@ -44,7 +44,7 @@ RSpec.describe Projects::CreateContract do
     let(:permissions) { [:add_project] }
     let!(:allowed_to) do
       allow(current_user)
-        .to receive(:allowed_to_globally?) do |permission|
+        .to receive(:allowed_in_any_project?) do |permission|
           permissions.include?(permission)
         end
     end

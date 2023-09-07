@@ -53,7 +53,7 @@ module Meetings
     private
 
     def delete_enabled?
-      User.current.allowed_to?(:delete_meetings, @meeting.project)
+      User.current.allowed_in_project?(:delete_meetings, @meeting.project)
     end
 
     def show_partial

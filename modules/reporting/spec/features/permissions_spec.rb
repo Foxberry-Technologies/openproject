@@ -1,16 +1,13 @@
 require 'spec_helper'
 require_relative 'support/pages/cost_report_page'
 
-RSpec.describe 'Cost report calculations', js: true do
+RSpec.describe 'Cost report calculations', :js do
   let(:project) { create(:project) }
   let(:admin) { create(:admin) }
 
   let!(:permissions) { %i(view_cost_entries view_own_cost_entries) }
   let!(:role) { create(:role, permissions:) }
-  let!(:user) do
-    create(:user,
-           member_with_roles: { project => role })
-  end
+  let!(:user) { create(:user, member_with_roles: { project => role }) }
 
   let(:work_package) { create(:work_package, project:) }
   let!(:hourly_rate_admin) { create(:default_hourly_rate, user: admin, rate: 1.00, valid_from: 1.year.ago) }
