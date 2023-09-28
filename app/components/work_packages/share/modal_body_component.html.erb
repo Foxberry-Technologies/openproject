@@ -6,8 +6,7 @@
       flex_layout(data: { turbo: true }) do |modal_content|
         modal_content.with_row do
           if sharing_enabled?
-            render(WorkPackages::Share::InviteUserFormComponent.new(
-              work_package: @work_package))
+            render(WorkPackages::Share::InviteUserFormComponent.new(work_package: @work_package))
           else
             render(Primer::Beta::Flash.new(icon: :info)) { I18n.t('work_package.sharing.permissions.denied') }
           end
