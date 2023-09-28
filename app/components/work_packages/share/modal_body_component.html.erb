@@ -12,7 +12,7 @@
           end
         end
 
-        if shared_users.empty?
+        if shared_users.none?
           modal_content.with_row(mt: 3) do
             render(Primer::Beta::Blankslate.new(border: true)) do |component|
               component.with_visual_icon(icon: :people, size: :medium)
