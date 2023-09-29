@@ -55,9 +55,9 @@ module Authorization
       return true if admin_and_all_granted_to_admin?(perms)
 
       if in_project
-        WorkPackage.allowed_to(user, perms).exists?(project: in_project)
+        entity_class.allowed_to(user, perms).exists?(project: in_project)
       else
-        WorkPackage.allowed_to(user, perms).exists?
+        entity_class.allowed_to(user, perms).exists?
       end
     end
 
