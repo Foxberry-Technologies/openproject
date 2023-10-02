@@ -35,14 +35,12 @@ import {
   HostBinding,
   Injector,
   Input,
+  OnInit,
   Output,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  ControlValueAccessor,
-  NG_VALUE_ACCESSOR,
-} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { merge, Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -52,10 +50,7 @@ import { PathHelperService } from 'core-app/core/path-helper/path-helper.service
 import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { HalResourceNotificationService } from 'core-app/features/hal/services/hal-resource-notification.service';
 import { ApiV3Service } from 'core-app/core/apiv3/api-v3.service';
-import {
-  ApiV3ListFilter,
-  listParamsString,
-} from 'core-app/core/apiv3/paths/apiv3-list-resource.interface';
+import { ApiV3ListFilter, listParamsString } from 'core-app/core/apiv3/paths/apiv3-list-resource.interface';
 import { populateInputsFromDataset } from 'core-app/shared/components/dataset-inputs';
 
 import { IProjectAutocompleteItem } from './project-autocomplete-item';
@@ -86,7 +81,7 @@ export interface IProjectAutocompleterData {
     multi: true,
   }],
 })
-export class ProjectAutocompleterComponent implements ControlValueAccessor {
+export class ProjectAutocompleterComponent implements ControlValueAccessor, OnInit {
   @HostBinding('class.op-project-autocompleter') public className = true;
 
   @HostBinding('class.op-project-autocompleter_inline')
@@ -177,6 +172,10 @@ export class ProjectAutocompleterComponent implements ControlValueAccessor {
     readonly injector:Injector,
   ) {
     populateInputsFromDataset(this);
+  }
+
+  ngOnInit() {
+    console.log(this.labelForId);
   }
 
   private matchingItems(elements:IProjectAutocompleteItem[], matching:string):Observable<IProjectAutocompleteItem[]> {
